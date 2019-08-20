@@ -1,5 +1,5 @@
-from django.http import HttpResponse, JsonResponse
 from django.contrib.postgres.search import SearchVector
+from django.http import HttpResponse, JsonResponse
 from textblob import TextBlob
 
 from api.models import Article
