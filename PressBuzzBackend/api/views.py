@@ -2,6 +2,7 @@ from django.contrib.postgres.search import SearchVector
 from django.http import HttpResponse, JsonResponse
 from textblob import TextBlob
 
+from api.forms import ArticleForm
 from api.models import Article
 
 
@@ -33,3 +34,23 @@ def sentiments(request):
             sentiment_list.append("'result': 'error', 'message': 'No article with this term found'")
 
     return JsonResponse(sentiment_list, safe=False)
+
+
+def article_data(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            ids = request.POST.get('ids').split(",")
+            article_set = Article.objects.filter(id__in=ids)
+            article_list = []
+            if article_set:
+                for article in article_set:
+                    article_list.append({'article_url': article.article_url,
+                                         'pub_date': article.pub_date,
+                                         'title': article.title,
+                                         'image_url': article.cover_image,
+                                         'authors': article.author
+                                         })
+            else:
+                article_list.append("'result': 'error', 'message': 'No articles with these ids found'")
+            return JsonResponse(article_list, safe=False)
