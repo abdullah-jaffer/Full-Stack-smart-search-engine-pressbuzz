@@ -3,6 +3,7 @@ import "./App.css";
 import SearchAppBar from "./components/Bar";
 import Search from "./components/Search";
 import Analytics from "./components/Analytics";
+import Articles from "./components/Articles"
 import "./index.css";
 
 class App extends Component {

@@ -33,7 +33,7 @@ def sentiments(request):
                                        'subjectivity': average_subjectivity})
                 sentiment_dictionary = {'articles': sentiment_list}
         else:
-            sentiment_list.append("'result': 'error', 'message': 'No article with this term found'")
+            return JsonResponse("{'result': error, 'message': No article with this term found}", safe=False)
 
     return JsonResponse(sentiment_dictionary, safe=False)
 

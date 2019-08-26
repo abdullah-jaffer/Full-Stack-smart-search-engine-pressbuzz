@@ -5,7 +5,7 @@ const constants = {
   TERM_PATH: "api/sentiments/?term=",
   theme: createMuiTheme({
     palette: {
-      primary: { main: "#001b4d" }
+      primary: { main: "#FB8C00" }
     }
   })
 };

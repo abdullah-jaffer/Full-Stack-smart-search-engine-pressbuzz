@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import constants from "./constants";
 import Analytics from "./Analytics";
+import Articles from "./Articles";
 import { Redirect, withRouter, Route } from "react-router-dom";
 
 class Search extends Component {
@@ -38,6 +39,7 @@ class Search extends Component {
             path="/dashboard"
             render={() => <Analytics term={this.state.term} />}
           />
+          <Route path="/articles"  render={() => <Articles data={this.state.result} />} />
           <Redirect to={"/dashboard"} />
         </div>
       );

@@ -6,7 +6,7 @@ import "../index.css";
 
 const images = [
   {
-    url: "https://cdn.hipwallpaper.com/i/3/95/r4wFeW.jpg",
+    url: "https://www.getbeamer.com/wp-content/uploads/2018/07/qqqqqqqqqq.png",
     title: "View the Articles",
     width: "100%"
   }

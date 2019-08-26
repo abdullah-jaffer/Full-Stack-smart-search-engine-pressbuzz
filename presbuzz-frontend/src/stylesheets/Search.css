@@ -13,7 +13,7 @@
 .logo {
     margin-top: 5%;
     font-size: 100px;
-    color:orange;
+    color:#FF6F00;
 }
 
 .button {
@@ -28,7 +28,7 @@ body, html {
   height: 100%;
 }
 .bc {
-  background-image: url("http://papers.co/wallpaper/papers.co-vk51-android-lollipop-material-design-dark-yellow-pattern-41-iphone-wallpaper.jpg");
+  background-image: url("https://htmlcolors.com/color-image/fdd835.png");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;

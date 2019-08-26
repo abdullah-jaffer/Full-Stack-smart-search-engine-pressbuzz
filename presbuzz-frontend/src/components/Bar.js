@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 
   },
   bar: {
-    backgroundColor: "#001b4d"
+    backgroundColor: "#FB8C00"
   },
   title: {
     flexGrow: 1,
@@ -86,7 +86,7 @@ export default function SearchAppBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <a href="https://github.com/abdullah-jaffer/PressBuzz"> <img src="https://cdn3.iconfinder.com/data/icons/sociocons/256/github-sociocon.png" alt="" width="32" height="32" /></a>
+          <a href="https://github.com/abdullah-jaffer/PressBuzz"> <img src="https://image.flaticon.com/icons/svg/25/25231.svg" alt="" width="32" height="32" /></a>
         </Toolbar>
       </AppBar>
     </div>

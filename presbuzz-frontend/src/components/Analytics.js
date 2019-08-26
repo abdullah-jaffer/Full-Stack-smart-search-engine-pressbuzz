@@ -22,7 +22,7 @@ class Analytics extends Component {
     this.state = {
       result: [],
       showComponent: false,
-      checked: false,
+      isCompressed: false,
       redirect: false
     };
 
@@ -36,7 +36,7 @@ class Analytics extends Component {
       .then(data => this.setState({ showComponent: true }));
   }
   handleChange = name => event => {
-    this.setState({ checked: event.target.checked });
+    this.setState({ isCompressed: event.target.checked });
   };
 
   handleClick(event) {
@@ -46,26 +46,26 @@ class Analytics extends Component {
     let style = {
       height: "500px"
     };
-    let style1 = {
+    let largeScreenHeight = {
       height: "420vh"
     };
 
-    let style2 = {
-      height: "320vh"
+    let smallScreenHeight = {
+      height: "420vh"
     };
+
     if (this.state.redirect === true) {
       return (
         <div>
-          <Route path="/articles" render={() => <Articles ids="1,2,3" />} />
           <Redirect to={"/articles"} />
         </div>
       );
     }
 
-    if (this.state.checked === true) {
+    if (this.state.isCompressed === true) {
       if (this.state.showComponent === true) {
         return (
-          <div className="bg" style={style2}>
+          <div className="bg" style={smallScreenHeight}>
             <div className="row">
               <div className="col-md-12" onClick={this.handleClick}>
                 <ButtonBases className="button" />
@@ -78,7 +78,7 @@ class Analytics extends Component {
                     <FormControlLabel
                       control={
                         <Switch
-                          checked={this.state.checked}
+                          checked={this.state.isCompressed }
                           onChange={this.handleChange("checked")}
                           value="checked"
                         />
@@ -101,11 +101,11 @@ class Analytics extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-4 box">
+                <div className="col-md-6 box">
                   <h1 className="heading">Date Wise Trend</h1>
                   <Linechart data={this.state.result} />
                 </div>
-                <div className="col-md-8 box" style={style}>
+                <div className="col-md-6 box" style={style}>
                   <h1 className="heading">In depth view</h1>
                   <Calendar data={this.state.result} />
                 </div>
@@ -135,7 +135,7 @@ class Analytics extends Component {
     } else {
       if (this.state.showComponent === true) {
         return (
-          <div className="bg" style={style1}>
+          <div className="bg" style={largeScreenHeight}>
             <div className="row">
               <div className="col-md-12" onClick={this.handleClick}>
                 <ButtonBases className="button" />
@@ -148,7 +148,7 @@ class Analytics extends Component {
                     <FormControlLabel
                       control={
                         <Switch
-                          checked={this.state.checked}
+                          checked={this.state.isCompressed }
                           onChange={this.handleChange("checked")}
                           value="checked"
                         />
@@ -211,4 +211,4 @@ class Analytics extends Component {
   }
 }
 
-export default withRouter(Analytics);
+export default  withRouter(Analytics);

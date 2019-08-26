@@ -1,0 +1,15 @@
+.list {
+    padding-top : 40%;
+}
+
+body, html {
+    height: 100%;
+  }
+  .bk {
+    background-image: url("https://htmlcolors.com/color-image/fdd835.png");
+    height: 420vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 50px;
+    }
