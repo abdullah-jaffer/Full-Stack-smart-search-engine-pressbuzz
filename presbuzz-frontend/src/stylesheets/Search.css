@@ -7,14 +7,35 @@
    padding: 0.5%;
    margin-bottom: 30px;
    font-size:18px;
+   border-radius: 5px;
 }
 
 .logo {
     margin-top: 5%;
     font-size: 100px;
-    color:orange;
+    color:#FF6F00;
 }
 
 .button {
   padding-top: 50px;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+}
+.bc {
+  background-image: url("https://htmlcolors.com/color-image/fdd835.png");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top:-20px;
+  }
+
+  .searchPanel {
+    padding-top: 80px;
+  }

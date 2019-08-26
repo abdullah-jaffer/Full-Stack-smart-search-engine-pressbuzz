@@ -13,8 +13,9 @@ def index(request):
 def sentiments(request):
     term = request.GET.get('term', '')
     sentiment_list = []
+    sentiment_dictionary = {}
     if term.strip():
-        article_set = Article.objects.annotate(search=SearchVector('content'),).filter(search=term)
+        article_set = Article.objects.annotate(search=SearchVector('content'),).filter(search=term).order_by('-pub_date')
         if article_set.exists():
             for article in article_set.iterator():
                 converted_text = TextBlob(article.content)
@@ -30,10 +31,11 @@ def sentiments(request):
                                        'pub_date': article.pub_date,
                                        'polarity': average_polarity,
                                        'subjectivity': average_subjectivity})
+                sentiment_dictionary = {'articles': sentiment_list}
         else:
-            sentiment_list.append("'result': 'error', 'message': 'No article with this term found'")
+            return JsonResponse("{'result': error, 'message': No article with this term found}", safe=False)
 
-    return JsonResponse(sentiment_list, safe=False)
+    return JsonResponse(sentiment_dictionary, safe=False)
 
 
 def article_data(request):
