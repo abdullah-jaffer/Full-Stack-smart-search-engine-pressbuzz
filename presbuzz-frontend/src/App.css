@@ -31,3 +31,14 @@
     transform: rotate(360deg);
   }
 }
+body, html {
+  height: 100%;
+}
+
+.bc {
+  background-image: url("https://images.pexels.com/photos/2457274/pexels-photo-2457274.jpeg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }

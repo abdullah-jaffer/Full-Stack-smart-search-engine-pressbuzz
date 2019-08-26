@@ -7,6 +7,7 @@
    padding: 0.5%;
    margin-bottom: 30px;
    font-size:18px;
+   border-radius: 5px;
 }
 
 .logo {
@@ -18,3 +19,23 @@
 .button {
   padding-top: 50px;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+}
+.bc {
+  background-image: url("http://papers.co/wallpaper/papers.co-vk51-android-lollipop-material-design-dark-yellow-pattern-41-iphone-wallpaper.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top:-20px;
+  }
+
+  .searchPanel {
+    padding-top: 80px;
+  }
