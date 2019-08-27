@@ -13,37 +13,7 @@ class Linechart extends Component {
   chartRef = React.createRef();
 
   componentWillMount() {
-    let sentiments = {};
-    let i;
-    for (i = 0; i < Object.keys(this.props.data).length; i++) {
-      if (sentiments[this.props.data[i].pub_date.split("T")[0]]) {
-        sentiments[this.props.data[i].pub_date.split("T")[0]] = {
-          sum:
-            sentiments[this.props.data[i].pub_date.split("T")[0]].polarity +
-            this.props.data[i].polarity,
-          occurence:
-            sentiments[this.props.data[i].pub_date.split("T")[0]].occurence + 1
-        };
-      } else {
-        sentiments[this.props.data[i].pub_date.split("T")[0]] = {
-          sum: this.props.data[i].polarity,
-          occurence: 1
-        };
-      }
-    }
-    console.log(sentiments);
-    let averageSentiments = [];
-
-    for (let key in sentiments) {
-      if (sentiments.hasOwnProperty(key)) {
-        console.log(key + " -> " + sentiments[key]);
-        averageSentiments[key] =
-          sentiments[key].sum / sentiments[key].occurence;
-      }
-    }
-
-    console.log(averageSentiments);
-    this.setState({ result: averageSentiments });
+    this.setState({ result: this.props.data });
     this.setState({ showComponent: true });
   }
 

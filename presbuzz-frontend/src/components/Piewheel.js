@@ -11,24 +11,7 @@ class Piewheel extends Component {
   }
   chartRef = React.createRef();
   componentWillMount() {
-    let counts = {};
-    counts["positive"] = 0;
-    counts["negative"] = 0;
-    counts["neutral"] = 0;
-    let i = 0;
-    for (i = 0; i < Object.keys(this.props.data).length; i++) {
-      console.log(this.props.data[i].polarity);
-      let sentiments = this.props.data[i].polarity;
-      if (sentiments < 0) {
-        counts["negative"] = counts["negative"] ? counts["negative"] + 1 : 1;
-      } else if (sentiments > 0) {
-        counts["positive"] = counts["positive"] ? counts["positive"] + 1 : 1;
-      } else {
-        counts["neutral"] = counts["neutral"] ? counts["neutral"] + 1 : 1;
-      }
-    }
-    console.log("These are the years" + Object.keys(counts));
-    this.setState({ result: counts });
+    this.setState({ result: this.props.data });
     this.setState({ showComponent: true });
   }
 

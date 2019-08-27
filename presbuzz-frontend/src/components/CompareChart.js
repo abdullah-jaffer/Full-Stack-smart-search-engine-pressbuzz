@@ -15,7 +15,7 @@ class CompareChart extends Component {
   chartRef = React.createRef();
 
   componentWillMount() {
-    this.setState({ result1: this.preprocessDataSet(this.props.input1) });
+    this.setState({ result1: this.props.input1 });
     this.setState({ result2: this.preprocessDataSet(this.props.input2) });
     this.setState({ showComponent: true });
   }

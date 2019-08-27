@@ -13,17 +13,7 @@ class Barchart extends Component {
   chartRef = React.createRef();
 
   componentWillMount() {
-    let counts = {};
-    counts[" "] = 0;
-    let i = 0;
-    for (i = 0; i < Object.keys(this.props.data).length; i++) {
-      console.log(this.props.data[i].pub_date);
-      let date = String(this.props.data[i].pub_date);
-      let year = date.split("-")[0];
-      counts[year] = counts[year] ? counts[year] + 1 : 1;
-    }
-    console.log("These are the years" + Object.keys(counts));
-    this.setState({ result: counts });
+    this.setState({ result: this.props.data });
     this.setState({ showComponent: true });
   }
   componentDidMount() {
