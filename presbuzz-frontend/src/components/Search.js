@@ -25,9 +25,13 @@ class Search extends Component {
   }
 
   handleSubmit(event) {
-    alert("A term was submitted: " + this.state.term);
     event.preventDefault();
-    this.setState({ showComponent: true });
+    window.sessionStorage.setItem("term", this.state.term.trim());
+    if(window.sessionStorage.getItem("term") === ""){
+      alert("Please don't leave the search bar empty");
+    }else{
+      this.setState({ showComponent: true });
+    }
   }
 
   render() {
@@ -37,16 +41,16 @@ class Search extends Component {
           <Route exact path="/" />
           <Route
             path="/dashboard"
-            render={() => <Analytics term={this.state.term} />}
+            render={() => <Analytics term={window.sessionStorage.getItem("term")} />}
           />
-          <Route path="/articles"  render={() => <Articles data={this.state.result} />} />
+          <Route path="/articles"  render={() => <Articles data={window.sessionStorage.getItem("keys")} />} />
           <Redirect to={"/dashboard"} />
         </div>
       );
     }
 
     return (
-      <div className="bc">
+      <div className="bc" ref="comp">
         <div className="searchPanel">
           <h1 className="logo">PressBuzz</h1>
           <form onSubmit={this.handleSubmit}>

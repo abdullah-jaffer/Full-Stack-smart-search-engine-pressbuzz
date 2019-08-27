@@ -11,18 +11,8 @@ class Calendar extends Component {
   }
 
   componentWillMount() {
-    let sentimentsList = [];
-    let i = 0;
-    for (i = 0; i < Object.keys(this.props.data).length; i++) {
-      let sentiments = {
-        day: this.props.data[i].pub_date.split("T")[0],
-        value: this.props.data[i].polarity
-      };
-      sentimentsList.push(sentiments);
-    }
-
     this.setState({ showComponent: true });
-    this.setState({ result: sentimentsList });
+    this.setState({ result: this.props.data });
   }
 
   render() {
