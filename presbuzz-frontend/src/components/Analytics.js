@@ -32,26 +32,31 @@ class Analytics extends Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentWillMount() {
-    let term = this.props.term;
+    let term = window.sessionStorage.getItem("term");
     fetch(constants.BASE_URL + constants.TERM_PATH + term)
       .then(response => response.json())
-      .then(data => this.setState({ result: preProcess(data.articles) }))
-      .then(data => this.setState({ showComponent: true }));
+      .then(data => this.setState({ result: preProcess(data) }))
+      .then(data => this.setState({ showComponent: true })).then(data => window.sessionStorage.setItem("term", ""));
   }
   handleChange = name => event => {
     this.setState({ isCompressed: event.target.checked });
   };
 
-  handleSubmit = name => event => {
-    console.log("here");
+  handleSubmit(event){
+    console.log("here " + window.sessionStorage.getItem("term"));
     if (window.sessionStorage.getItem("term") === "") {
       alert("Please don't leave the search bar empty");
     } else {
-      this.setState({ reShowComponent: true });
+      const current = this.props.location.pathname;
+      this.props.history.replace(`/reload`);
+       setTimeout(() => {
+      this.props.history.replace(current);
+    });
     }
-  };
+  }
 
   handleClick(event) {
     window.sessionStorage.setItem("keys", this.state.result["idList"]);
@@ -68,6 +73,12 @@ class Analytics extends Component {
     let smallScreenHeight = {
       height: "320vh"
     };
+ 
+    if(window.sessionStorage.getItem("home") === true){
+      return (
+            <Redirect to ={"/"} />
+      );
+    }
 
     if (this.state.redirect === true) {
       return (
@@ -77,12 +88,10 @@ class Analytics extends Component {
       );
     }
 
-    if (this.state.reShowComponent === true) {
-      return (
-        <div>
-          <Redirect to={"/dashboard"} />
-        </div>
-      );
+    if (this.state.result === 'no data') {
+      alert("No such keyword found :(");
+      return ( <Redirect to={"/"} />
+        );
     }
 
     if (this.state.isCompressed === true) {
@@ -96,6 +105,7 @@ class Analytics extends Component {
             </div>
             <div className="row">
               <div className="col-md-1">
+                <div className="miniform">
                 <SmallSearch />
                 <form>
                   <ThemeProvider theme={constants.theme}>
@@ -109,6 +119,7 @@ class Analytics extends Component {
                     </Button>
                   </ThemeProvider>
                 </form>
+                </div>
               </div>
               <div className="col-md-11">
                 <div className="container">
@@ -184,7 +195,8 @@ class Analytics extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-1" onClick={this.handleSubmit}>
+              <div className="col-md-1">
+                <div className="miniform">
                 <SmallSearch />
                 <ThemeProvider theme={constants.theme}>
                   <Button
@@ -196,6 +208,7 @@ class Analytics extends Component {
                     Search
                   </Button>
                 </ThemeProvider>
+              </div>
               </div>
               <div className="col-md-11">
                 <div className="container">
@@ -261,8 +274,8 @@ class Analytics extends Component {
         );
       } else {
         return (
-          <div>
-            ><h1>Loading...</h1>
+          <div className="Loader">
+            <h1>Loading...</h1>
             <CircularProgress disableShrink />
           </div>
         );

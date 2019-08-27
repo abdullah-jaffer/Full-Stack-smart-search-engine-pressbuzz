@@ -21,3 +21,15 @@ body, html {
     background-size: cover;
     margin-top: 50px;
     }
+
+.miniform {
+  margin-top: 30px;
+  /* border: 6px solid rgb(238, 135, 0); */
+  position: fixed;
+  padding-left: 10px;
+}
+
+.Loader{
+    margin-top: 5%;
+    size: 20%;;
+}

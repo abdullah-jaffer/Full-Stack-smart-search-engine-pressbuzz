@@ -26,6 +26,7 @@ class Search extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    window.sessionStorage.setItem("home", false);
     window.sessionStorage.setItem("term", this.state.term.trim());
     if(window.sessionStorage.getItem("term") === ""){
       alert("Please don't leave the search bar empty");
@@ -38,7 +39,7 @@ class Search extends Component {
     if (this.state.showComponent === true) {
       return (
         <div>
-          <Route exact path="/" />
+          <Route exact path="/" component={Search}/>
           <Route
             path="/dashboard"
             render={() => <Analytics term={window.sessionStorage.getItem("term")} />}

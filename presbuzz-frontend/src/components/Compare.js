@@ -4,6 +4,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import constants from "./constants";
 import CompareChart from "./CompareChart";
 import "../stylesheets/Compare.css";
+import { withRouter } from "react-router-dom";
 
 class Compare extends Component {
   constructor(props) {
@@ -28,11 +29,17 @@ class Compare extends Component {
     let term = this.state.term;
     fetch(constants.BASE_URL + constants.TERM_PATH + term)
       .then(response => response.json())
-      .then(data => this.setState({ result: data.articles }))
+      .then(data => this.setState({ result: data }))
       .then(data => this.setState({ showComponent: true }));
   }
 
   render() {
+    if(this.state.result === "{'result': error, 'message': No article with this term found}"){
+      alert("No such keyword found :(");
+      return ( 
+         <Compare data = {this.props.data}/>
+        );
+    }
     return (
       <div>
         <div className="row">
@@ -65,7 +72,7 @@ class Compare extends Component {
             {this.state.showComponent ? (
               <CompareChart
                 input1={this.props.data}
-                input2={this.state.result}
+                input2={this.state.result.articles}
               />
             ) : null}
           </div>

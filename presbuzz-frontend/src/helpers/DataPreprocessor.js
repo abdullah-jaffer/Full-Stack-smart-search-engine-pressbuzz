@@ -1,8 +1,9 @@
-export const preProcess = (data)=>{
-    if(data === undefined){
+export const preProcess = (input)=>{
+  console.log(input);
+    if(input === "{'result': error, 'message': No article with this term found}"){
         return "no data";
     }else {
-
+    let data = input.articles;
     let dataFor = {};
     
     let idList = "";

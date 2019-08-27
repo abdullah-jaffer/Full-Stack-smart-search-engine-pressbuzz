@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import constants from "./constants";
 import "../stylesheets/Articles.css";
+import { Redirect, withRouter } from "react-router-dom";
 
 class Articles extends Component {
   constructor(props) {
@@ -19,6 +20,11 @@ class Articles extends Component {
   }
 
   render() {
+    if(window.sessionStorage.getItem("home") === true){
+      return (
+            <Redirect to ={"/"} />
+      );
+    }
     let style = {
       width: "90%"
     };
@@ -51,4 +57,4 @@ class Articles extends Component {
   }
 }
 
-export default Articles;
+export default withRouter(Articles);

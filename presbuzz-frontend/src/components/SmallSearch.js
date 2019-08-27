@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../stylesheets/Compare.css";
+import "../stylesheets/SmallSearch.css";
 
 class SmallSearch extends Component {
   constructor(props) {
@@ -11,17 +11,18 @@ class SmallSearch extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ term: event.target.value });
-    window.sessionStorage.setItem("term", this.state.term.trim());
+  async handleChange(event) {
+    console.log("state " + this.state.term);
+    await this.setState({ term: event.target.value });
+    window.sessionStorage.setItem("term", this.state.term);
+    console.log("session " + window.sessionStorage.getItem("item"));
   }
 
   render() {
   
     return (
       <div>
-         <form onSubmit={this.handleSubmit}>
-              <div className="wrapper">
+              <div className="bar">
                 <input
                   className=""
                   placeholder="Search Another Term"
@@ -30,7 +31,6 @@ class SmallSearch extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-            </form>
       </div>
     );
   }
