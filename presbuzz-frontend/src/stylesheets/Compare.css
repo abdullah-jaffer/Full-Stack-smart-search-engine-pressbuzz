@@ -6,7 +6,8 @@
 .wrapper {
     display: inline;
     box-shadow: 0px 0px 0px 0px white;
-    background: white;
+    /* background: white; */
+    padding-right: 10px;
 }
 
 .bbox {

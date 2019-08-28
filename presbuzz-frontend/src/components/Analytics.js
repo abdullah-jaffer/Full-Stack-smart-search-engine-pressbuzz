@@ -18,6 +18,7 @@ import { preProcess } from "../helpers/DataPreprocessor";
 import SmallSearch from "./SmallSearch";
 import Button from "@material-ui/core/Button";
 import { ThemeProvider } from "@material-ui/styles";
+import arrow from '../assets/left-arrow.png';
 
 class Analytics extends Component {
   constructor(props) {
@@ -26,13 +27,16 @@ class Analytics extends Component {
       result: [],
       showComponent: false,
       reShowComponent: false,
-      isCompressed: false,
+      isCompressed: true,
       redirect: false,
+      redirectHome: false,
       term: ""
     };
-
+    
+    
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
   }
   componentWillMount() {
     let term = window.sessionStorage.getItem("term");
@@ -45,9 +49,12 @@ class Analytics extends Component {
     this.setState({ isCompressed: event.target.checked });
   };
 
+  handleRedirect(){
+    this.setState({redirectHome: true});
+  }
   handleSubmit(event){
     console.log("here " + window.sessionStorage.getItem("term"));
-    if (window.sessionStorage.getItem("term") === "") {
+    if (window.sessionStorage.getItem("term").trim() === "") {
       alert("Please don't leave the search bar empty");
     } else {
       const current = this.props.location.pathname;
@@ -62,19 +69,22 @@ class Analytics extends Component {
     window.sessionStorage.setItem("keys", this.state.result["idList"]);
     this.setState({ redirect: true });
   }
+
+  
+
   render() {
     let style = {
       height: "500px"
     };
     let largeScreenHeight = {
-      height: "420vh"
+      height: "400vh"
     };
 
     let smallScreenHeight = {
-      height: "320vh"
+      height: "280vh"
     };
  
-    if(window.sessionStorage.getItem("home") === true){
+    if(this.state.redirectHome === true){
       return (
             <Redirect to ={"/"} />
       );
@@ -93,7 +103,7 @@ class Analytics extends Component {
       return ( <Redirect to={"/"} />
         );
     }
-
+    
     if (this.state.isCompressed === true) {
       if (this.state.showComponent === true) {
         return (
@@ -105,6 +115,9 @@ class Analytics extends Component {
             </div>
             <div className="row">
               <div className="col-md-1">
+              <Button  color="secondary" onClick = {this.handleRedirect}>
+                <img src={arrow} alt="" width="15px" height="10px"/> <p>Home</p>
+              </Button>
                 <div className="miniform">
                 <SmallSearch />
                 <form>
@@ -196,6 +209,9 @@ class Analytics extends Component {
             </div>
             <div className="row">
               <div className="col-md-1">
+              <Button  color="secondary" onClick = {this.handleRedirect}>
+                <img src={arrow} alt="" width="15px" height="10px"/> <p>Home</p>
+              </Button>
                 <div className="miniform">
                 <SmallSearch />
                 <ThemeProvider theme={constants.theme}>

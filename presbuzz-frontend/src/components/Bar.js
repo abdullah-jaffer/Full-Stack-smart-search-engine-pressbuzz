@@ -3,7 +3,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { fade, makeStyles } from "@material-ui/core/styles";
-
+import logo from '../assets/pressbuzz.png';
+import "../stylesheets/Bar.css";
 
 const useStyles = makeStyles(theme => ({
 
@@ -64,14 +65,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
-  const myHandler = (e) => {window.sessionStorage.setItem("home", true)};
   return (
     <div className={classes.root}>
     
       <AppBar className={classes.bar} position="fixed">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap onClick={(e) => myHandler(e)}>
-            PressBuzz
+           
+          <Typography className={classes.title} variant="h6" noWrap>
+            <div>
+          <img src={logo} alt="logo" className="bar-logo" width="120px" height="30px"/>
+          </div>
           </Typography>
           <a href="https://github.com/abdullah-jaffer/PressBuzz"> <img src="https://image.flaticon.com/icons/svg/25/25231.svg" alt="" width="32" height="32" /></a>
         </Toolbar>

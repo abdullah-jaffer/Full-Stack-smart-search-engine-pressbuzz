@@ -11,9 +11,9 @@
 }
 
 .logo {
-    margin-top: 5%;
-    font-size: 100px;
-    color:#FF6F00;
+    margin-top: 10%;
+    /* font-size: 100px;
+    color:#FF6F00; */
 }
 
 .button {
@@ -28,8 +28,8 @@ body, html {
   height: 100%;
 }
 .bc {
-  background-image: url("https://htmlcolors.com/color-image/fdd835.png");
-  height: 100vh;
+  /* background-image: url("https://htmlcolors.com/color-image/fdd835.png"); */
+  height: 120vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

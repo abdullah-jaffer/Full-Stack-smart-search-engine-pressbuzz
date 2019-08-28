@@ -8,8 +8,9 @@ class Articles extends Component {
     super(props);
     this.state = {
       result: [],
-      showComponent: false
-    };
+      showComponent: false,
+      redirect: false
+    }
   }
 
   componentDidMount() {
@@ -20,7 +21,7 @@ class Articles extends Component {
   }
 
   render() {
-    if(window.sessionStorage.getItem("home") === true){
+    if(this.state.redirect === true){
       return (
             <Redirect to ={"/"} />
       );

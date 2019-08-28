@@ -15,7 +15,6 @@ body, html {
   }
   .bg {
     background-image: url("https://htmlcolors.com/color-image/fdd835.png");
-    height: 420vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -32,4 +31,9 @@ body, html {
 .Loader{
     margin-top: 5%;
     size: 20%;;
+}
+
+p {
+  margin-left: 18px;
+  margin-top: 14px;
 }

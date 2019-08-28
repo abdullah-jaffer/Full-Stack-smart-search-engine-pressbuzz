@@ -6,6 +6,7 @@ import constants from "./constants";
 import Analytics from "./Analytics";
 import Articles from "./Articles";
 import { Redirect, withRouter, Route } from "react-router-dom";
+import logo from '../assets/pressbuzz.png';
 
 class Search extends Component {
   constructor(props) {
@@ -53,7 +54,8 @@ class Search extends Component {
     return (
       <div className="bc" ref="comp">
         <div className="searchPanel">
-          <h1 className="logo">PressBuzz</h1>
+          {/* <h1 className="logo">PressBuzz</h1> */}
+          <img src={logo} alt="logo" className="logo"/>
           <form onSubmit={this.handleSubmit}>
             <div className="textFieldWrapper">
               <input
