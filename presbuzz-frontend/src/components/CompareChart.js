@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 class CompareChart extends Component {
   constructor(props) {
@@ -74,7 +75,8 @@ class CompareChart extends Component {
             label: ["Average Sentiments"]
           }
         ],
-        labels: this.state.fillArray
+        // labels: this.state.fillArray
+         labels: Object.keys(this.state.result1)
       }
     });
   }
@@ -83,7 +85,7 @@ class CompareChart extends Component {
       <div>
         {this.state.showComponent ? (
           <canvas id="myChart" ref={this.chartRef} width="150" height="40" />
-        ) : null}
+        ) : <CircularProgress disableShrink />}
       </div>
     );
   }

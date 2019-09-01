@@ -17,21 +17,28 @@ def sentiments(request):
     if term.strip():
         article_set = Article.objects.annotate(search=SearchVector('content'),).filter(search=term).order_by('-pub_date')
         if article_set.exists():
+            sentiment_dictionary.update({'mentions': len(article_set)})
+            counter = 0
+            limit = 500
             for article in article_set.iterator():
-                converted_text = TextBlob(article.content)
-                polarity = [0.0]
-                subjectivity = [0.0]
-                for sentence in converted_text.sentences:
-                    if term.lower() in sentence.lower():
-                        polarity.append(sentence.sentiment.polarity)
-                        subjectivity.append(sentence.sentiment.subjectivity)
-                average_polarity = sum(polarity)/len(polarity)
-                average_subjectivity = sum(subjectivity)/len(subjectivity)
-                sentiment_list.append({'id': article.id,
-                                       'pub_date': article.pub_date,
-                                       'polarity': average_polarity,
-                                       'subjectivity': average_subjectivity})
-                sentiment_dictionary = {'articles': sentiment_list}
+                if counter < limit:
+                    converted_text = TextBlob(article.content)
+                    polarity = [0.0]
+                    subjectivity = [0.0]
+                    for sentence in converted_text.sentences:
+                        if term.lower() in sentence.lower():
+                            polarity.append(sentence.sentiment.polarity)
+                            subjectivity.append(sentence.sentiment.subjectivity)
+                    average_polarity = sum(polarity)/len(polarity)
+                    average_subjectivity = sum(subjectivity)/len(subjectivity)
+                    sentiment_list.append({'id': article.id,
+                                           'pub_date': article.pub_date,
+                                           'polarity': average_polarity,
+                                           'subjectivity': average_subjectivity})
+                    counter = counter + 1
+                else:
+                    break
+            sentiment_dictionary.update({'articles': sentiment_list})
         else:
             return JsonResponse("{'result': error, 'message': No article with this term found}", safe=False)
 
