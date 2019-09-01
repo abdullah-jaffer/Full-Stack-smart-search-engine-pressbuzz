@@ -15,7 +15,7 @@ def sentiments(request):
     sentiment_list = []
     sentiment_dictionary = {}
     if term.strip():
-        article_set = Article.objects.annotate(search=SearchVector('content'),).filter(search=term).order_by('-pub_date')
+        article_set = Article.objects.annotate(search=SearchVector('title'),).filter(search=term).order_by('-pub_date')
         if article_set.exists():
             sentiment_dictionary.update({'mentions': len(article_set)})
             counter = 0
