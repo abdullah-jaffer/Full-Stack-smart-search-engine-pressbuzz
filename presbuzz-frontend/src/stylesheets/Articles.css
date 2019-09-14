@@ -1,5 +1,5 @@
 .list {
-    padding-top : 100px;
+    padding-top : 45px;
 }
 
 body, html {
@@ -11,15 +11,26 @@ body, html {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     }
-
-.card {
-  margin-left: 8%;
-  background-color: #FF6F00;
-}
 
 .hd {
   font-size:80px;
   color:#FF6F00;
+}
+
+.card-media {
+  height: 140;
+}
+.title{
+  font-size: 7px;
+}
+
+.card {
+  width: 50;
+  display: inline-block;
+}
+
+.button {
+  margin-left: -80%;
 }

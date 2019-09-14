@@ -73,6 +73,8 @@ class Compare extends Component {
               <CompareChart
                 input1={this.props.data}
                 input2={this.state.result.articles}
+                term1={this.props.term1}
+                term2={this.state.term}
               />
             ) : null}
           </div>

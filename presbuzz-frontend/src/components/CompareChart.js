@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import moment from 'moment';
 
 class CompareChart extends Component {
   constructor(props) {
@@ -8,7 +9,9 @@ class CompareChart extends Component {
     this.state = {
       result1: {},
       result2: {},
-      fillArray: [""],
+      graphData1: [],
+      graphData2: [],
+      labels: [],
       showComponent: false
     };
   }
@@ -16,11 +19,41 @@ class CompareChart extends Component {
   chartRef = React.createRef();
 
   componentWillMount() {
-    this.setState({ result1: this.props.input1 });
-    this.setState({ result2: this.preprocessDataSet(this.props.input2) });
+    this.setState({ graphData1: this.dateFiller(this.props.input1) });
+    this.setState({ graphData2: this.dateFiller(this.preprocessDataSet(this.props.input2)) });
     this.setState({ showComponent: true });
   }
 
+  dateFiller(data) {
+    let labels = Object.keys(data).slice(0,20).reverse();
+    let graphData = Object.values(data).slice(0,20).reverse();
+    for (let i = 0; i < labels.length; i++) {
+      //make sure we are not checking the last date in the labels array
+      if (i + 1 < labels.length) {
+        let date1 = moment(labels[i], "YYYY-MM-DD");
+        let date2 = moment(labels[i + 1], "YYYY-MM-DD");
+    
+        
+        //if the current date +1 is not the same as it's next neighbor we have to add in a new one
+        if (!date1.add(1, "days").isSame(date2)) {
+          
+          //add the label
+          labels.splice(i + 1, 0, date1.format("YYYY-MM-DD"));
+          //add the data
+          graphData.splice(i + 1, 0, 0);
+        }
+      }
+    
+    
+    }
+    for(let i = 0; i < graphData.length; i++){
+      graphData[i] = graphData[i] || 0;
+    }
+    console.log(labels[10] +"="+graphData[10]);
+    this.setState({labels: labels});
+
+    return graphData;
+  }
   preprocessDataSet(data) {
     let sentiments = {};
     let i;
@@ -49,10 +82,6 @@ class CompareChart extends Component {
       }
     }
 
-    if (averageSentiments.length > this.state.fillArray.length) {
-      this.setState({ fillArray: Array(averageSentiments.length).fill(" ") });
-    }
-
     return averageSentiments;
   }
 
@@ -63,20 +92,19 @@ class CompareChart extends Component {
       data: {
         datasets: [
           {
-            data: Object.values(this.state.result1),
-            borderColor: ["rgb(255,0,0)"],
+            data: this.state.graphData1,
+            borderColor: ["rgb(0,255,255)"],
             fill: true,
-            label: ["Average Sentiments"]
+            label: this.props.term1
           },
           {
-            data: Object.values(this.state.result2),
-            borderColor: ["rgb(0, 255, 255)"],
+            data: this.state.graphData2,
+            borderColor: ["rgb(255,0,0)"],
             fill: false,
-            label: ["Average Sentiments"]
+            label: this.props.term2
           }
         ],
-        // labels: this.state.fillArray
-         labels: Object.keys(this.state.result1)
+        labels: this.state.labels
       }
     });
   }

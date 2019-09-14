@@ -43,7 +43,7 @@ class Analytics extends Component {
     fetch(constants.BASE_URL + constants.TERM_PATH + term)
       .then(response => response.json())
       .then(data => this.setState({ result: preProcess(data) }))
-      .then(data => this.setState({ showComponent: true })).then(data => window.sessionStorage.setItem("term", ""));
+      .then(data => this.setState({ showComponent: true }));
   }
   handleChange = name => event => {
     this.setState({ isCompressed: event.target.checked });
@@ -177,7 +177,7 @@ class Analytics extends Component {
                   <div className="row">
                     <div className="col-md-12" style={style}>
                       <h1 className="heading">Compare Keywords</h1>
-                      <Compare data={this.state.result["Linechart"]} />
+                      <Compare term1= {window.sessionStorage.getItem("term")} data={this.state.result["Linechart"]} />
                     </div>
                   </div>
                 </div>
@@ -192,8 +192,8 @@ class Analytics extends Component {
         );
       } else {
         return (
-          <div>
-            ><h1>Loading...</h1>
+          <div className="Loader">
+            <h1>Loading...</h1>
             <CircularProgress disableShrink />
           </div>
         );
@@ -274,7 +274,7 @@ class Analytics extends Component {
                   <div className="row">
                     <div className="col-md-12" style={style}>
                       <h1 className="heading">Compare Keywords</h1>
-                      <Compare data={this.state.result["Linechart"]} />
+                      <Compare term1= {window.sessionStorage.getItem("term")} data={this.state.result["Linechart"]} />
                     </div>
                   </div>
                 </div>

@@ -24,9 +24,10 @@ class SmallSearch extends Component {
       <div>
               <div className="bar">
                 <input
-                  className=""
+                  className="input"
                   placeholder="Search Another Term"
                   type="text"
+                  
                   value={this.state.value}
                   onChange={this.handleChange}
                 />

@@ -27,7 +27,7 @@ class Calendar extends Component {
       return (
         <ResponsiveCalendar
           data={this.state.result}
-          from="2016-08-04"
+          from="2017-01-01"
           to={date}
           emptyColor="#eeeeee"
           colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
